@@ -71,5 +71,9 @@
 }
 
 .App {
-  margin: 0 auto;
+  padding: 10px;
+}
+
+.points {
+  float: right;
 }

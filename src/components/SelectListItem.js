@@ -16,7 +16,7 @@ export default function SelectListItem(props) {
       return (
         <div
           draggable
-          onDragStart={(e) => handleDragStart(e, props.tokenIndex)}
+          onDragStart={(e) => handleDragStart(e, token.tokenIndex)}
           className="flex-item-dragtotop nowrap"
           tokenidx={token.tokenIndex}
         >
