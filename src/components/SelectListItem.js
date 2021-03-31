@@ -8,13 +8,21 @@ export default function SelectListItem(props) {
     e.stopPropagation();
     console.log(e.dataTransfer)
     console.log("dragging started", e.target, token);
-    
   };
+
+  const handleClick = (e, token) => {
+    // console.log(token.tokenIndex, 'was the clicked tokenIndex')
+    // console.log('the active token is', props.activeToken)
+    if (token.tokenIndex == props.activeToken) {
+      props.updatePhraseToken(token.tokenIndex)
+    }
+  }
 
   const renderListToken = (token) => {
     if (token.mask) {
       return (
         <div
+          onClick={(e) => handleClick(e, token)}
           draggable
           onDragStart={(e) => handleDragStart(e, token.tokenIndex)}
           className="flex-item-dragtotop nowrap"

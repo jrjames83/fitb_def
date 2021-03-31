@@ -7,7 +7,14 @@ import SelectListItem from "./components/SelectListItem";
 // https://www.pluralsight.com/guides/drag-and-drop-react-components
 
 function App() {
-  // create multiple definitions and do the shoot
+
+  const getActiveToken = (tokens) => {
+    for(let i = 0; i < tokens.length; i++) {
+      if (tokens[i].mask === true) {
+        return i
+      }
+    }
+  }
 
   const phrase = [
     {
@@ -98,9 +105,14 @@ function App() {
   const [pointsWon, setPointsWon] = useState(0);
   // const [phrases, setPhrases] = useState(phrase[termIndex].tokens);
   const [phrases, setPhrases] = useState(phrase);
+  const [activeToken, setActiveToken] = useState(getActiveToken(phrases[termIndex].tokens))
 
-  // Similar to componentDidMount and componentDidUpdate:
 
+  // When the term index changes, reset the active term
+  useEffect(() => {
+    setActiveToken(getActiveToken(phrases[termIndex].tokens))
+    setQuizSolved(false)
+  }, [termIndex]);
 
   // How to know if it's solved?
   const isSolved = () => {
@@ -114,16 +126,14 @@ function App() {
       }  
   };
 
-  const nextButton = () => {
-    setTermIndex(termIndex + 1)
-    console.log(termIndex, 'is the term index')
-    setQuizSolved(false)
+  const nextButton = (e) => {
+    setTermIndex(oldTermIndex => oldTermIndex + 1)
   };
 
   const updatePhraseToken = (tokenId) => {
     setPhrases(
       phrases.map((p, i) => {
-        if (termIndex == i) {
+        if (termIndex === i) {
           let tempObj = p; 
           tempObj.tokens[tokenId].mask = false;
           return tempObj
@@ -133,13 +143,14 @@ function App() {
       })
     )
     isSolved()
+    setActiveToken(getActiveToken(phrases[termIndex].tokens))
   };
 
   return (
     <div className="App">
       <header>
         <div className="points">Pop Quiz Points: {pointsWon}</div>
-        <h1>{phrase[termIndex].fullTerm}</h1>
+        <h1>{phrase[termIndex].fullTerm} Is the Word</h1>
       </header>
       <div className="flex-container wrap">
         {phrases[termIndex].tokens.map((token, tokenIndex) => (
@@ -147,6 +158,7 @@ function App() {
             <PhraseItem
               token={token}
               tokenIndex={token.tokenIndex}
+              activeToken={activeToken}
               updatePhraseMask={updatePhraseToken}
             />
           </div>
@@ -156,11 +168,15 @@ function App() {
       <div className="flex-container nowrap">
         <ul>
           {phrases[termIndex].tokens.map((token, tokenIndex) => (
-            <SelectListItem token={token} tokenIndex={token.tokenIndex} />
+            <SelectListItem 
+                  token={token} 
+                  updatePhraseToken={updatePhraseToken}
+                  tokenIndex={token.tokenIndex} 
+                  activeToken={activeToken} />
           ))}
         </ul>
         {quizSolved ? (
-          <button onClick={() => nextButton()}>Next challenge</button>
+          <button onClick={(e) => nextButton(e)}>Next challenge</button>
         ) : null}
       </div>
     </div>

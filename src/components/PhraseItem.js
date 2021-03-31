@@ -19,19 +19,21 @@ export default function PhraseItem(props) {
         }
     }
 
-  const renderPhraseToken = (token) => {
+  const renderPhraseToken = (token, activeToken) => {
+    // restrict to the activeIndex
       let tokenText = token.mask ? '_____________' : token.token
+      let className = (token.mask && token.tokenIndex == activeToken)? 'flex-item wrap dashed' : 'flex-item wrap'
       return (
         <div 
             onDragOver={(e) => onDragOver(e, props.tokenIndex)} 
             onDrop={(e) => onDrop(e, props.tokenIndex)}
             onDragEnter={(e) => e.preventDefault()}
             draggable 
-            className="flex-item wrap">
+            className={className}>
           {" "}
           <p className="token">{tokenText}</p>
         </div>
       );
     }
-  return renderPhraseToken(props.token);
+  return renderPhraseToken(props.token, props.activeToken);
 }

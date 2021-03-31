@@ -44,6 +44,10 @@
   text-align: center;
 }
 
+.dashed {
+  border: 2px dashed blue;
+}
+
 .flex-item-blank {
   background: lightgreen;
   padding: 3px;
