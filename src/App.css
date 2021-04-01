@@ -2,14 +2,17 @@
   padding: 0;
   margin: 0;
   list-style: none;
-  border: 1px solid silver;
   -ms-box-orient: horizontal;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex;
+
+}
+
+._body {
+  background-color: black;
+}
+
+h1 {
+  color: white;
 }
 
 .token {
@@ -17,67 +20,78 @@
 }
 
 .nowrap  { 
-  -webkit-flex-wrap: nowrap;
-  flex-wrap: nowrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .wrap    { 
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }  
-.wrap li {
-  background: gold;
-}
-
 
 
 .flex-item {
-  background: tomato;
+  background: rgb(86, 77, 211);
   padding: auto;
   width: auto;
   height: auto;
-  margin: 5px;
-  
+  margin: 1px;
+  display: flex;
   color: white;
-  font-weight: bold;
-  font-size: 1em;
+  font-weight: normal;
+  font-size: .5em;
   text-align: center;
+  align-items: center;
 }
 
 .dashed {
-  border: 2px dashed blue;
+  border: 2px dashed yellowgreen
 }
 
+
+
+.select-words {
+  display: flex;
+  align-items: center;
+  width: auto;
+  margin: auto;
+
+}
+
+
 .flex-item-blank {
-  background: lightgreen;
+  background: rgba(97, 225, 161, 0.788);
   padding: 3px;
   width: auto;
   height: auto;
   margin: 5px;
   
   color: white;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 2em;
   text-align: center;
 }
 
 .flex-item-dragtotop {
-  background: seagreen;
+  background: rgb(112, 174, 139);
   padding: 3px;
   width: auto;
   height: auto;
   margin: 5px;
   
+  
   color: white;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 2em;
   text-align: center;
 }
 
 .App {
   padding: 10px;
+
 }
 
 .points {
   float: right;
+  color: white;
 }

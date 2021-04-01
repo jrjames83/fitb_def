@@ -2,6 +2,11 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import PhraseItem from "./components/PhraseItem";
 import SelectListItem from "./components/SelectListItem";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 
 // https://css-tricks.com/almanac/properties/f/flex-wrap/
 // https://www.pluralsight.com/guides/drag-and-drop-react-components
@@ -143,18 +148,21 @@ function App() {
       })
     )
     isSolved()
+    // Advance the active token to focucs the user on what to fill in next
     setActiveToken(getActiveToken(phrases[termIndex].tokens))
   };
 
   return (
+    <Container className="_body">
     <div className="App">
       <header>
         <div className="points">Pop Quiz Points: {pointsWon}</div>
-        <h1>{phrase[termIndex].fullTerm} Is the Word</h1>
+        <h1>Term: {phrase[termIndex].fullTerm}</h1>
       </header>
+      <Row>
       <div className="flex-container wrap">
         {phrases[termIndex].tokens.map((token, tokenIndex) => (
-          <div draggable className="flex-item wrap">
+          <div draggable className="flex-item">
             <PhraseItem
               token={token}
               tokenIndex={token.tokenIndex}
@@ -164,22 +172,26 @@ function App() {
           </div>
         ))}
       </div>
+      </Row>
 
-      <div className="flex-container nowrap">
-        <ul>
+      <Row className="p-2">
+      <div className="flex-container wrap">
           {phrases[termIndex].tokens.map((token, tokenIndex) => (
             <SelectListItem 
                   token={token} 
+                  className="flex-item-blank"
                   updatePhraseToken={updatePhraseToken}
                   tokenIndex={token.tokenIndex} 
                   activeToken={activeToken} />
           ))}
-        </ul>
         {quizSolved ? (
           <button onClick={(e) => nextButton(e)}>Next challenge</button>
         ) : null}
       </div>
+      </Row>
     </div>
+    
+    </Container> 
   );
 }
 

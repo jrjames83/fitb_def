@@ -12,7 +12,7 @@ export default function SelectListItem(props) {
 
   const handleClick = (e, token) => {
     // console.log(token.tokenIndex, 'was the clicked tokenIndex')
-    // console.log('the active token is', props.activeToken)
+    console.log('the active token is', props.activeToken)
     if (token.tokenIndex == props.activeToken) {
       props.updatePhraseToken(token.tokenIndex)
     }
@@ -25,10 +25,10 @@ export default function SelectListItem(props) {
           onClick={(e) => handleClick(e, token)}
           draggable
           onDragStart={(e) => handleDragStart(e, token.tokenIndex)}
-          className="flex-item-dragtotop nowrap"
+          className="flex-item-dragtotop"
           tokenidx={token.tokenIndex}
         >
-          <li className="token">{token.token}</li>
+          <div className="token">{token.token}</div>
         </div>
       );
     } else {
