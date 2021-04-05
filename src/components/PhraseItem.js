@@ -1,5 +1,7 @@
 import React from "react";
 
+
+
 export default function PhraseItem(props) {
 
     const onDragOver = (e) => {
@@ -21,8 +23,8 @@ export default function PhraseItem(props) {
 
   const renderPhraseToken = (token, activeToken) => {
     // restrict to the activeIndex
-      let tokenText = token.mask ? '_____________' : token.token
-      let className = (token.mask && token.tokenIndex == activeToken)? 'flex-item wrap dashed' : 'flex-item wrap'
+      let tokenText = token.mask ? '_____________' : token.text
+      let className = (token.mask && token.tokenIndex == activeToken)? 'flex-item wrap dashed pulser' : 'flex-item wrap'
       return (
         <div 
             onDragOver={(e) => onDragOver(e, props.tokenIndex)} 
